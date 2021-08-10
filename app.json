@@ -1,0 +1,36 @@
+{
+  "pages":[  
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/rainbowfart/rainbowfart",
+    "pages/aboutAuthor/aboutAuthor"
+    
+  ],
+  "tabBar": {
+    "color":"black",
+    "selectedColor": "green",
+    "borderStyle": "black",
+    "list": [{
+      "selectedIconPath": "utils/IMG/bottombold/1h.png",
+      "iconPath": "utils/IMG/bottombold/1n.png",
+      "pagePath": "pages/index/index"
+    },{
+      "selectedIconPath": "utils/IMG/bottombold/2h.png",
+      "iconPath": "utils/IMG/bottombold/2n.png",
+      "pagePath": "pages/rainbowfart/rainbowfart"
+    },{
+      "selectedIconPath": "utils/IMG/bottombold/3h.png",
+      "iconPath": "utils/IMG/bottombold/3n.png",
+      "pagePath": "pages/aboutAuthor/aboutAuthor"
+    }
+  ]
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

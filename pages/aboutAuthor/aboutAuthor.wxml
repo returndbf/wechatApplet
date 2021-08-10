@@ -1,0 +1,7 @@
+<!--pages/aboutAuthor/aboutAuthor.wxml-->
+
+ <official-account style=""></official-account>
+<button style="width: 420rpx;border-radius: 50px" id="gzh" bindtap="showgzh">大笨峰的公众号</button>
+<button style="width: 420rpx;border-radius: 50px" id="script" bindtap="showscript">Greasy Fork脚本库</button>
+<button style="width: 420rpx;border-radius: 50px" id="gitpage" bindtap="showgitpage">个人网站</button>
+<button style="width: 420rpx;border-radius: 50px" id="zcool" bindtap="showzcool">站酷</button>

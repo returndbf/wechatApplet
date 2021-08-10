@@ -1,0 +1,26 @@
+/* pages/aboutAuthor/aboutAuthor.wxss */
+page{
+background-color: 	#FFFAFA;
+}
+button{
+  position: relative;
+  margin-top: 10%;
+
+}
+#gzh{
+  margin-top: 15%;
+  background-color: #7FFFD4;
+  font-size: medium;
+}
+#script{
+  background-color: 	#FF6A6A;
+  font-size: medium;
+}
+#gitpage{
+  background-color: 	#6E7B8B;
+  font-size: medium;
+}
+#zcool{
+  background-color: 	#FFD700;
+  font-size: medium;
+}

@@ -1,0 +1,12 @@
+
+<!-- <image wx:if="{{show}}" src=""></image> -->
+<view id="banner">
+<swiper bindtap="start" id="swiper" autoplay="{{play}}" interval="100" duration="0" circular="false"  easing-function="easeInOutCubic" >
+  <swiper-item wx:for="{{picArr}}" catchtouchmove='catchTouchMove' >
+  <view class="img">
+  <image wx:if="{{picArr.length>0}}" src="{{item}}"   mode="aspectFit"> </image>
+</view>
+</swiper-item>
+</swiper>
+</view>
+<button  bindtap="start" id="start" style="border-radius: 50px">{{start}}</button>

@@ -1,0 +1,22 @@
+page{
+  background-color: #f8f8ff;
+}
+#start{
+  background-color:	#00F5FF;
+  position: relative;
+  box-shadow: azure;
+  border-radius: 5px;
+}
+#banner{
+  position: relative;
+  margin-top: 20%;
+}
+.img{
+display: flex;
+justify-content: center;
+
+}
+
+#swiper{
+  height: 300px;
+}
