@@ -52,3 +52,62 @@ button{
   background-color:skyblue ;
   margin-left: 10%;
 }
+#add{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: thistle;
+  font-size: medium;
+  margin-top: 25%;
+}
+.modal-popup {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+}
+.modal-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+ 
+  width: 80%;
+  max-width: 600rpx;
+  border: 2rpx solid #ccc;
+  border-radius: 10rpx;
+  box-sizing: bordre-box;
+  transform: translate(-50%, -50%); 
+  overflow: hidden;
+  background: #fff;
+}
+.modal-title {
+  width: 100%;
+  padding: 20rpx;
+  text-align: center;
+  font-size: 40rpx; 
+}
+.hr{
+  width: 100%;
+  height: 2px;
+  background-color: rgb(252, 226, 250);
+}
+.modal-content {
+  margin: 60rpx 10rpx;
+  text-align: center;
+}
+.modal-btn {
+  display: flex;
+  justify-content: space-around;
+  
+}
+.modal-btn text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 88rpx;
+  border: 2rpx solid rgb(206, 218, 248);
+  
+}

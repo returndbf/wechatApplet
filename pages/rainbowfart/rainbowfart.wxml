@@ -1,10 +1,25 @@
 <!--pages/rainbowfart/rainbowfart.wxml-->
+
 <view id="rainbowSentence" >
 <image src="../../utils/IMG/bottommini/彩虹 (1).png" id="rainbow"></image>
 <view id="textBg"></view>
 
 </view>
+
 <text style="color:{{color}}" id="text">{{sentence}}</text>
+
 <button bindtap="change" id="change" style="width:280rpx;border-radius: 50px">换一个</button>
 <button bindtap="copy" id="copy" style="width:280rpx;border-radius: 50px">复制这个</button>
+<button bindtap="add" id="add" style="width:280rpx;border-radius: 50px">添加彩虹屁</button>
 
+<view class="modal-popup" hidden="{{modalDisplay}}">
+  <view class='modal-container' style="border-radius:10px">
+    <view class="modal-title">添加彩虹屁</view>
+    <view class="hr"></view>
+    <input type="text" class="modal-content" placeholder="放个彩虹屁！" bindinput="getText" value="{{inputSentence}}"></input>
+    <view class="modal-btn">
+      <text class="btn-no" bindtap='cancel'>返回</text>
+      <text class="btn-ok" bindtap='submit'>完成</text>
+    </view>
+  </view>
+</view>
