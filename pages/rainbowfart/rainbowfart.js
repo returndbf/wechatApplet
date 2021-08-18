@@ -46,6 +46,7 @@ Page({
     sentence: "",//存储显示和复制的数据
     modalDisplay: true,//弹窗显示，true为隐藏，false为显示
     inputSentence: "",//存储文本框中的数据
+    word: ""//暗号
   },
   //切换句子的方法
   change() {
@@ -111,13 +112,21 @@ Page({
     }, () => console.log('赋值成功'))
 
   },
+  getWord(event){
+     //赋值给全局data中变量word
+     this.setData({
+      word: event.detail.value //event.detail.value获取输入数据
+    })
+  },
   //提交文本按钮事件
   submit(event) {
     //console.log(this.data.inputSentence)
     //trim()是防止出现全是空格的情况，此处sentence不是全局data中的sentence
     let sentence = this.data.inputSentence.trim();
+    let word = this.data.word;
     //判空
     if (sentence.length != 0 && sentence != "" && sentence != null) {
+      if(word==="我爱大笨峰"){
       //数据库添加操作
       sentences.add({
         //需要添加的数据对象
@@ -131,7 +140,8 @@ Page({
           //弹出框隐藏
           modalDisplay: true,
           //清除文本框中的文本
-          inputSentence: ""
+          inputSentence: "",
+          
         })
         wx.showToast({
           title: '添加成功'
@@ -143,6 +153,19 @@ Page({
           icon: 'none'//设置为none提示框便只有数字
         })
       })
+    }else{
+        wx.showToast({
+          title: '暗号错误',
+          icon: 'none'//设置为none提示框便只有数字
+        })
+        this.setData({
+          //弹出框隐藏
+          modalDisplay: true,
+          //清除文本框中的文本
+          inputSentence: "",
+          word:""
+        })
+      }
     } else {
       wx.showToast({
         title: '内容不能为空',

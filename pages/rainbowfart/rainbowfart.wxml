@@ -17,6 +17,7 @@
     <view class="modal-title">添加彩虹屁</view>
     <view class="hr"></view>
     <input type="text" class="modal-content" placeholder="放个彩虹屁！" bindinput="getText" value="{{inputSentence}}"></input>
+    <input type="text" class="modal-content" placeholder="输入暗号才可添加" bindinput="getWord" value="{{word}}"></input>
     <view class="modal-btn">
       <text class="btn-no" bindtap='cancel'>返回</text>
       <text class="btn-ok" bindtap='submit'>完成</text>
