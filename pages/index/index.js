@@ -2,6 +2,8 @@
 // 获取应用实例
 //const app = getApp()
 
+
+
 Page({
   onLoad() {
     wx.showShareMenu({
@@ -9,6 +11,7 @@ Page({
       menus: ['shareAppMessage', 'shareTimeline']
     })
   },
+
   onShareTimeline() {
     return {
       title: "做个决定吧",
@@ -106,7 +109,5 @@ Page({
         complete: (res) => { },
       })
     }
-
-
   }
 })

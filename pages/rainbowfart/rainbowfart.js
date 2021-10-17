@@ -53,18 +53,41 @@ Page({
     //console.log(db)
     //随机获取颜色数组中一条数据下标
     let randomColor = Math.floor(Math.random() * this.data.colors.length)
-    //从数据库随机获取一条记录
-    db.collection('sentences').aggregate()
-      .sample({
-        size: 1
-      })
-      .end().then(res => {
-         //console.log(res.list[0].sentence); 
-         this.setData({
-           sentence : res.list[0].sentence, //修改句子为数据库随机一条数据
-           color: this.data.colors[randomColor] //修改颜色为随机颜色
-         })
+    //从https://dabenfeng.top/后端获取数据
+    wx.request({
+      url: 'https://dabenfeng.top/rainbowFart/randomRainbowFart',
+      header:{
+        'content-type': 'application/json'
+      },
+      //箭头函数为了修改this指向
+      success:(res)=>{
+        this.setData({
+          //res.data为调用接口返回值
+          sentence:res.data.data.sentence,
+          //修改颜色为随机颜色
+          color:this.data.colors[randomColor]
+        }) 
+      },
+      fail(res){
+        wx.showModal({
+          cancelColor: 'cancelColor',
+          title:"获取数据失败"
         })
+      }
+    })
+    //从数据库随机获取一条记录
+    //废弃，云数据库不再使用
+    // db.collection('sentences').aggregate()
+    //   .sample({
+    //     size: 1
+    //   })
+    //   .end().then(res => {
+    //      //console.log(res.list[0].sentence); 
+    //      this.setData({
+    //        sentence : res.list[0].sentence, //修改句子为数据库随机一条数据
+    //        color: this.data.colors[randomColor] //修改颜色为随机颜色
+    //      })
+    //     })
       //被废弃，因为以前的数据是放在js数组中
    // let randomNum = Math.floor(Math.random() * this.data.sentences.length)
     // let randomColor = Math.floor(Math.random() * this.data.colors.length)
@@ -90,28 +113,29 @@ Page({
     })
   },
   //添加彩虹屁按钮
+  //暂时先不使用
   add() {
-    this.setData({
-      //显示弹窗
-      modalDisplay: false
-    }
-    )
-  },
-  //弹窗返回按钮
-  cancel() {
-    this.setData({
-      //隐藏弹窗
-      modalDisplay: true
+    wx.showModal({
+      confirmText:"知道啦",
+      title:"此功能暂时维护中",
+      showCancel:false
     })
   },
+  //弹窗返回按钮
+  // cancel() {
+  //   this.setData({
+  //     //隐藏弹窗
+  //     modalDisplay: true
+  //   })
+  // },
   //获取输入的文本
-  getText(event) {
-    //赋值给全局data中变量inputSentence
-    this.setData({
-      inputSentence: event.detail.value //event.detail.value获取输入数据
-    }, () => console.log('赋值成功'))
+  // getText(event) {
+  //   //赋值给全局data中变量inputSentence
+  //   this.setData({
+  //     inputSentence: event.detail.value //event.detail.value获取输入数据
+  //   }, () => console.log('赋值成功'))
 
-  },
+  // },
   getWord(event){
      //赋值给全局data中变量word
      this.setData({
@@ -119,60 +143,59 @@ Page({
     })
   },
   //提交文本按钮事件
-  submit(event) {
-    //console.log(this.data.inputSentence)
-    //trim()是防止出现全是空格的情况，此处sentence不是全局data中的sentence
-    let sentence = this.data.inputSentence.trim();
-    let word = this.data.word;
-    //判空
-    if (sentence.length != 0 && sentence != "" && sentence != null) {
-      if(word==="我爱大笨峰"){
-      //数据库添加操作
-      sentences.add({
-        //需要添加的数据对象
-        data: {
-          //前面的sentence是数据库中的key，后面的是上面定义的sentence
-          sentence: sentence
-        }
-      }).then(res => {
-        //添加完成的回调
-        this.setData({
-          //弹出框隐藏
-          modalDisplay: true,
-          //清除文本框中的文本
-          inputSentence: "",
-          
-        })
-        wx.showToast({
-          title: '添加成功'
-        })
-      }).catch(res=>{
-        //添加失败捕获异常
-        wx.showToast({
-          title: '非管理员不要调皮喔',
-          icon: 'none'//设置为none提示框便只有数字
-        })
-      })
-    }else{
-        wx.showToast({
-          title: '暗号错误',
-          icon: 'none'//设置为none提示框便只有数字
-        })
-        this.setData({
-          //弹出框隐藏
-          modalDisplay: true,
-          //清除文本框中的文本
-          inputSentence: "",
-          word:""
-        })
-      }
-    } else {
-      wx.showToast({
-        title: '内容不能为空',
-        icon: 'none'//设置为none提示框便只有数字
-      })
-    }
-  },
+  // submit(event) {
+  //   //console.log(this.data.inputSentence)
+  //   //trim()是防止出现全是空格的情况，此处sentence不是全局data中的sentence
+  //   let sentence = this.data.inputSentence.trim();
+  //   let word = this.data.word;
+  //   //判空
+  //   if (sentence.length != 0 && sentence != "" && sentence != null) {
+  //     if(word==="我爱大笨峰"){
+  //     //数据库添加操作
+  //     sentences.add({
+  //       //需要添加的数据对象
+  //       data: {
+  //         //前面的sentence是数据库中的key，后面的是上面定义的sentence
+  //         sentence: sentence
+  //       }
+  //     }).then(res => {
+  //       //添加完成的回调
+  //       this.setData({
+  //         //弹出框隐藏
+  //         modalDisplay: true,
+  //         //清除文本框中的文本
+  //         inputSentence: "", 
+  //       })
+  //       wx.showToast({
+  //         title: '添加成功'
+  //       })
+  //     }).catch(res=>{
+  //       //添加失败捕获异常
+  //       wx.showToast({
+  //         title: '非管理员不要调皮喔',
+  //         icon: 'none'//设置为none提示框便只有数字
+  //       })
+  //     })
+  //   }else{
+  //       wx.showToast({
+  //         title: '暗号错误',
+  //         icon: 'none'//设置为none提示框便只有数字
+  //       })
+  //       this.setData({
+  //         //弹出框隐藏
+  //         modalDisplay: true,
+  //         //清除文本框中的文本
+  //         inputSentence: "",
+  //         word:""
+  //       })
+  //     }
+  //   } else {
+  //     wx.showToast({
+  //       title: '内容不能为空',
+  //       icon: 'none'//设置为none提示框便只有数字
+  //     })
+  //   }
+  // },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "openapi": [
+     "http://101.42.103.236:8080/rainbowFart/randomRainbowFart"
+    ]
+  }
+}
