@@ -1,11 +1,16 @@
 page{
   background-color: #f8f8ff;
 }
+.btn{
+  display: flex;
+  justify-content: center;
+}
 #start{
-  background-color:	#00F5FF;
   position: relative;
   box-shadow: azure;
   border-radius: 5px;
+  margin:0 auto;
+ 
 }
 #banner{
   position: relative;

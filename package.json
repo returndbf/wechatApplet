@@ -1,0 +1,22 @@
+{
+  "name": "mini-program",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/returndbf/wechatApplet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/returndbf/wechatApplet/issues"
+  },
+  "homepage": "https://github.com/returndbf/wechatApplet#readme",
+  "dependencies": {
+    "lin-ui": "^0.9.7"
+  }
+}

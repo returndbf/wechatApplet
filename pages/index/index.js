@@ -2,10 +2,30 @@
 // 获取应用实例
 //const app = getApp()
 
-
-
 Page({
   onLoad() {
+    wx.login({
+      success: (res) => {
+          // 通过code换取openid
+          if (res.code) {
+              wx.request({
+                  url: "",
+                  method: "get",
+                  data: {
+                      code: res.code,
+                  },
+                  success: (res) => {
+                      if (res.data && res.data.openid) {
+                          // 获取的openid存入storage，方便之后使用
+                          wx.setStorageSync("openId", res.data.openid);
+                      }
+                  },
+              });
+          }
+      },
+      fail: () => {},
+      complete: () => {},
+  });
     wx.showShareMenu({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']

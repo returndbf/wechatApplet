@@ -7,6 +7,7 @@
     "pages/aboutAuthor/aboutAuthor"
     
   ],
+
   "tabBar": {
     "color":"black",
     "selectedColor": "green",
@@ -25,6 +26,12 @@
       "pagePath": "pages/aboutAuthor/aboutAuthor"
     }
   ]
+  },
+  "usingComponents": {
+    "l-button":"/miniprogram_npm/lin-ui/button/index",
+    "l-icon":"/miniprogram_npm/lin-ui/icon/index",
+    "i-toast":"/miniprogram_npm/lin-ui/toast/index",
+    "i-dialog":"/miniprogram_npm/lin-ui/dialog/index"
   },
   "window":{
     "backgroundTextStyle":"light",

@@ -115,6 +115,26 @@ Page({
   //添加彩虹屁按钮
   //暂时先不使用
   add() {
+    wx.getSystemInfo({
+      success (res) {
+        console.log(res.model)
+        console.log(res.pixelRatio)
+        console.log(res.windowWidth)
+        console.log(res.screenHeight)
+        console.log(res.language)
+        console.log(res.version)
+        console.log(res.platform)
+      }
+    })
+  //  const deviceInfo = wx.getDeviceInfo()
+
+    // console.log(deviceInfo.abi)
+    // console.log(deviceInfo.benchmarkLevel)
+    // console.log(deviceInfo.brand)
+    // console.log(deviceInfo.model)
+    // console.log(deviceInfo.platform)
+    // console.log(deviceInfo.system)
+
     wx.showModal({
       confirmText:"知道啦",
       title:"此功能暂时维护中",
@@ -217,7 +237,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

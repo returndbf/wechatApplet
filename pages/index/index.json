@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+       
+  },
 
   "navigationBarTitleText": "做个决定吧",
   "navigationBarBackgroundColor": "#f8f8ff"
