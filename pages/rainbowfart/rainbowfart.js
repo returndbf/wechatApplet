@@ -65,7 +65,8 @@ Page({
           //res.data为调用接口返回值
           sentence:res.data.data.sentence,
           //修改颜色为随机颜色
-          color:this.data.colors[randomColor]
+          color:this.data.colors[randomColor],
+          modalDisplay:false
         }) 
       },
       fail(res){

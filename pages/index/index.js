@@ -4,28 +4,7 @@
 
 Page({
   onLoad() {
-    wx.login({
-      success: (res) => {
-          // 通过code换取openid
-          if (res.code) {
-              wx.request({
-                  url: "",
-                  method: "get",
-                  data: {
-                      code: res.code,
-                  },
-                  success: (res) => {
-                      if (res.data && res.data.openid) {
-                          // 获取的openid存入storage，方便之后使用
-                          wx.setStorageSync("openId", res.data.openid);
-                      }
-                  },
-              });
-          }
-      },
-      fail: () => {},
-      complete: () => {},
-  });
+
     wx.showShareMenu({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']
@@ -41,7 +20,6 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '做个决定吧',
-
       path: 'pages/index/index'
     }
   },
@@ -77,10 +55,15 @@ Page({
       start: this.data.start == "做个决定吧" ? "停" : "做个决定吧"
     })
     if (this.data.play == false) {
+      //后端获取，先插眼，在表字段中加入content的前缀，比如“我要学习”，用于返回之后直接使用，设置标识用于区分各个不同的种类（子数组），总之都放到后端
+      //表的设计应该为每一条都有某个分类的标记以及前缀，在获取时随机获得一条数据，将数据返回给前端
+      //添加一张分类表，内容为分类的标记，可以添加分类
+      //内容表关联分类表（对应标记），在添加内容时有选择分类
       let foodArr = ['火锅', '日料', '拉面', '烧烤', '烤鸭', '西式快餐', '自助餐', '寿司', '麻辣烫']
       let skillArr = ['Ps', 'Ai', 'Java', 'Mysql', 'Javascript', 'Pr', 'Ae', 'Lr', 'Linux']
       let Recipes = ['红烧肉', '水煮肉片', '小酥肉', '红烧鸡翅', '可乐鸡翅', '红烧鱼', '咖喱鸡', '油闷大虾', '糖醋里脊', '小炒肉', '尖椒肉丝']
       let allArr = [foodArr, skillArr, Recipes]
+
       let parentArrNum = Math.floor(Math.random() * allArr.length);//从allArr中获取随机下标，即获取随机子数组的下标
       //console.log(allArr[parentArrNum])
       let childArr = allArr[parentArrNum];//获取子数组
@@ -101,6 +84,7 @@ Page({
         default:
           break;
       }
+      
       wx.showModal({
         //cancelColor: 'cancelColor',
         //cancelText: '返回',

@@ -1,0 +1,7 @@
+<!--pages/diary/diary.wxml-->
+
+<view bindtap="show">
+今日天气：{{wheather}}
+</view>
+<image src="../../utils/icons/{{wheatherIcon}}.svg" class="icon"></image>
+

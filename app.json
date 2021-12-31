@@ -1,43 +1,57 @@
 {
   "cloud": true,
-  "pages":[  
+  "permission":{
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+    }
+  },
+  "pages": [
     "pages/index/index",
     "pages/logs/logs",
     "pages/rainbowfart/rainbowfart",
-    "pages/aboutAuthor/aboutAuthor"
-    
+    "pages/aboutAuthor/aboutAuthor",
+    "pages/diary/diary"
   ],
 
   "tabBar": {
-    "color":"black",
+    "color": "black",
     "selectedColor": "green",
     "borderStyle": "black",
-    "list": [{
-      "selectedIconPath": "utils/IMG/bottombold/1h.png",
-      "iconPath": "utils/IMG/bottombold/1n.png",
-      "pagePath": "pages/index/index"
-    },{
-      "selectedIconPath": "utils/IMG/bottombold/2h.png",
-      "iconPath": "utils/IMG/bottombold/2n.png",
-      "pagePath": "pages/rainbowfart/rainbowfart"
-    },{
-      "selectedIconPath": "utils/IMG/bottombold/3h.png",
-      "iconPath": "utils/IMG/bottombold/3n.png",
-      "pagePath": "pages/aboutAuthor/aboutAuthor"
-    }
-  ]
+    "list": [
+      {
+        "selectedIconPath": "utils/IMG/bottombold/1h.png",
+        "iconPath": "utils/IMG/bottombold/1n.png",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "selectedIconPath": "utils/IMG/bottombold/2h.png",
+        "iconPath": "utils/IMG/bottombold/2n.png",
+        "pagePath": "pages/rainbowfart/rainbowfart"
+      },
+      {
+        "selectedIconPath": "utils/IMG/bottombold/3h.png",
+        "iconPath": "utils/IMG/bottombold/3n.png",
+        "pagePath": "pages/aboutAuthor/aboutAuthor"
+      },
+      {
+        "selectedIconPath": "utils/IMG/bottombold/3h.png",
+        "iconPath": "utils/IMG/bottombold/3n.png",
+        "pagePath": "pages/diary/diary"
+      }
+    ]
   },
   "usingComponents": {
-    "l-button":"/miniprogram_npm/lin-ui/button/index",
-    "l-icon":"/miniprogram_npm/lin-ui/icon/index",
-    "i-toast":"/miniprogram_npm/lin-ui/toast/index",
-    "i-dialog":"/miniprogram_npm/lin-ui/dialog/index"
+    "l-button": "/miniprogram_npm/lin-ui/button/index",
+    "l-icon": "/miniprogram_npm/lin-ui/icon/index",
+    "l-toast": "/miniprogram_npm/lin-ui/toast/index",
+    "I-dialog": "/miniprogram_npm/lin-ui/dialog/index",
+    "l-transition": "/miniprogram_npm/lin-ui/transition/index"
   },
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Weixin",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

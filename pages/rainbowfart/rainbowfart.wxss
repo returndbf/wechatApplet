@@ -33,32 +33,22 @@ page{
 
 
 }
-button{
+l-button{
   position: relative;
   margin-top: 10%;
   display: inline;
   
-  width: 200rpx;
-  font-size: medium;
   
 }
-#change{
-  float: right;
-  background-color:tomato ;
-  margin-right: 10%;
-}
-#copy{
-  float: left;
-  background-color:skyblue ;
-  margin-left: 10%;
+
+.center-btn{
+  display: flex;
+  justify-content: space-around;
 }
 #add{
   position: relative;
-  display: flex;
-  justify-content: center;
-  background-color: thistle;
-  font-size: medium;
-  margin-top: 25%;
+  text-align: center;
+  margin-top: 10%;
 }
 .modal-popup {
   position: absolute;

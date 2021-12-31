@@ -1,0 +1,4 @@
+/* pages/diary/diary.wxss */
+.icon{
+  width: 10%;
+}
