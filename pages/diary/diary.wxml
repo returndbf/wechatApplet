@@ -1,7 +1,17 @@
 <!--pages/diary/diary.wxml-->
-
-<view bindtap="show">
-今日天气：{{wheather}}
+<view bindtap="show" class="wheather">
+  今日天气：{{wheather}}
 </view>
-<image src="../../utils/icons/{{wheatherIcon}}.svg" class="icon"></image>
+<view class="wheatherIcon">
+  <image src="../../utils/icons/{{wheatherIcon}}.svg" class="icon"></image>
+</view>
+<l-switch  bind:linchange="changeType"/>
 
+<van-calendar show="{{ false }}" bind:close="onClose" bind:confirm="onConfirm" min-date="{{ minDate }}"
+  max-date="{{ maxDate }}" />
+
+<l-card type="cover" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}">
+  <view class="content">
+    新疆苹果,又名塞威氏苹果,蔷微科,落叶乔木
+  </view>
+</l-card>

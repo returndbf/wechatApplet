@@ -2,7 +2,7 @@
   "cloud": true,
   "permission":{
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      "desc": "位置信息将用来获取你的天气" 
     }
   },
   "pages": [
@@ -44,8 +44,13 @@
     "l-button": "/miniprogram_npm/lin-ui/button/index",
     "l-icon": "/miniprogram_npm/lin-ui/icon/index",
     "l-toast": "/miniprogram_npm/lin-ui/toast/index",
-    "I-dialog": "/miniprogram_npm/lin-ui/dialog/index",
-    "l-transition": "/miniprogram_npm/lin-ui/transition/index"
+    "l-dialog": "/miniprogram_npm/lin-ui/dialog/index",
+    "l-transition": "/miniprogram_npm/lin-ui/transition/index",
+    "l-card": "/miniprogram_npm/lin-ui/card/index",
+    "l-switch": "/miniprogram_npm/lin-ui/switch/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-card": "@vant/weapp/card/index"
+  
   },
   "window": {
     "backgroundTextStyle": "light",
@@ -53,6 +58,5 @@
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle": "black"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

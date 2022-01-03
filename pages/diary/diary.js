@@ -5,12 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitude:0,
-    latitude:0,
-    res:null,
-    temp:0,
-    wheather:"晴",
-    wheatherIcon:null
+    longitude:0,//经度
+    latitude:0,//纬度
+    temp:0,//温度
+    wheather:"晴",//天气状况
+    wheatherIcon:null,//天气图标
+    minDate:null ,
+    maxDate: null,
+    switchOn:false,
+    title:"123"
   },
 show(){
   console.log(this.longitude,this.latitude,this.res,this.data.temp)
@@ -20,6 +23,7 @@ getLocation(){
     type: 'wgs84',
     success:(res)=>{
       wx.request({
+        //请求天气数据，通过经纬度
         url: 'https://devapi.qweather.com/v7/weather/now',
         data:{
           key:"0394034be5e54054bf95007e205ed377",
@@ -42,6 +46,14 @@ getLocation(){
     }
    })
 },
+changeType(event){
+  const checked = event.detail.checked
+  this.setData({
+    switchOn:checked
+  })
+  
+  console.log(this.data.switchOn)
+},
   /**
    * 生命周期函数--监听页面加载
    */
@@ -53,7 +65,13 @@ getLocation(){
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   this.getLocation()
+   this.getLocation();
+   const minDate = new Date(2022, 1, 2).getTime();
+   const maxDate = new Date(2022, 1, 10).getTime()
+   this.setData({
+     minDate:minDate,
+     maxDate:maxDate
+   })
   },
 
   /**

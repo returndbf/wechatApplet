@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/returndbf/wechatApplet#readme",
   "dependencies": {
+    "@vant/weapp": "^1.10.0",
     "lin-ui": "^0.9.7",
     "qweather-icons": "^1.1.0"
   }

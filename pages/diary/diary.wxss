@@ -1,4 +1,15 @@
 /* pages/diary/diary.wxss */
+.wheather{
+  display: inline-block;
+}
 .icon{
-  width: 10%;
+  width: 50rpx;
+  height: 50rpx;
+}
+.wheatherIcon{
+  display: inline-block;
+  vertical-align: middle;
+}
+.l-title-class{
+  width: 100rpx;
 }
