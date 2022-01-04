@@ -1,4 +1,6 @@
 // pages/diary/diary.js
+import {checkTextShow} from "./check"
+import {getLocation} from "./getInfo"
 Page({
 
   /**
@@ -12,60 +14,44 @@ Page({
     wheatherIcon:null,//天气图标
     minDate:null ,
     maxDate: null,
-    switchOn:false,
-    title:"123"
+    switchOn:false,//开关，是否打开文字卡片，true开启
+    title:"123",
+    notClock:true //是否显示打卡按钮，打卡之后消失，没有打卡为true
   },
-show(){
-  console.log(this.longitude,this.latitude,this.res,this.data.temp)
-},
-getLocation(){
-  wx.getLocation({
-    type: 'wgs84',
-    success:(res)=>{
-      wx.request({
-        //请求天气数据，通过经纬度
-        url: 'https://devapi.qweather.com/v7/weather/now',
-        data:{
-          key:"0394034be5e54054bf95007e205ed377",
-          location:`${res.longitude},${res.latitude}`
-        },
-        header:{
-          'content-type': 'application/json'
-        },
-        //箭头函数为了修改this指向
-        success:(res)=>{
-          console.log(res)
-          this.setData({
-            temp:res.data.now.temp,
-            wheather:res.data.now.text,
-            wheatherIcon:res.data.now.icon
-          })
-        },
-        
-      })
-    }
-   })
-},
+
+//改变是否以文本显示卡片
 changeType(event){
-  const checked = event.detail.checked
+  const checked = event.detail.checked //获取ui组件传入的switch开关状态,true打开
   this.setData({
-    switchOn:checked
+    switchOn:checked //switchOn控制显示，是否打开文字卡片
   })
-  
+  wx.setStorage({
+    key:"switchOn",
+    data: this.data.switchOn
+  })
   console.log(this.data.switchOn)
+},
+
+//打卡
+clockOn(){
+  this.setData({
+    notClock:false
+    // 发送网络请求，请求成功之后弹出窗口
+
+  })
 },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    checkTextShow(this) 
+    getLocation(this)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   this.getLocation();
    const minDate = new Date(2022, 1, 2).getTime();
    const maxDate = new Date(2022, 1, 10).getTime()
    this.setData({
@@ -78,7 +64,12 @@ changeType(event){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.getUserProfile({
+      success: function(res) {
+        console.log(res)
+      }
+    })
+    
   },
 
   /**

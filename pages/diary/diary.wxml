@@ -1,17 +1,34 @@
 <!--pages/diary/diary.wxml-->
+<!-- 天气状况 -->
 <view bindtap="show" class="wheather">
   今日天气：{{wheather}}
 </view>
+<!-- 天气图标 -->
 <view class="wheatherIcon">
   <image src="../../utils/icons/{{wheatherIcon}}.svg" class="icon"></image>
 </view>
-<l-switch  bind:linchange="changeType"/>
-
+<!-- 开关组件，控制卡片是否以文本显示 -->
+<view  class="switch">
+<l-switch  bind:linchange="changeType"  checked="{{ switchOn }}"/>
+</view>
+<text class="tips">开启文字卡片</text>
+<!-- 日历组件 -->
 <van-calendar show="{{ false }}" bind:close="onClose" bind:confirm="onConfirm" min-date="{{ minDate }}"
   max-date="{{ maxDate }}" />
-
+<!-- 卡片组件 -->
 <l-card type="cover" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}">
   <view class="content">
-    新疆苹果,又名塞威氏苹果,蔷微科,落叶乔木
+    大笨峰测试卡片
   </view>
 </l-card>
+
+<view class="clock"> 
+<l-transition show="{{ notClock }}">
+  <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
+</l-transition>
+<l-toast
+  show="{{notClock}}"
+  icon="success"
+  title="成功提示框"
+/>
+</view>

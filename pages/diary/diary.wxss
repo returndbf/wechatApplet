@@ -6,10 +6,23 @@
   width: 50rpx;
   height: 50rpx;
 }
+.switch{
+  display: inline;
+  float: right;
+}
+.tips{
+  float: right;
+}
 .wheatherIcon{
   display: inline-block;
   vertical-align: middle;
 }
 .l-title-class{
   width: 100rpx;
+}
+.clock{
+  position: fixed;
+  float: right;
+  right: 20rpx;
+  bottom: 50rpx;
 }
