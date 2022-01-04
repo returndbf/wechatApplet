@@ -20,9 +20,21 @@
 .l-title-class{
   width: 100rpx;
 }
+.list{
+  background-color: white;
+  height: 500rpx;
+  width: 500rpx;
+  border-radius: 10%;
+}
 .clock{
   position: fixed;
   float: right;
   right: 20rpx;
-  bottom: 50rpx;
+  bottom: 150rpx;
+}
+.clockList{
+  position: fixed;
+  float: right;
+  right: 20rpx;
+  bottom: 30rpx;
 }

@@ -13,8 +13,7 @@
 </view>
 <text class="tips">开启文字卡片</text>
 <!-- 日历组件 -->
-<van-calendar show="{{ false }}" bind:close="onClose" bind:confirm="onConfirm" min-date="{{ minDate }}"
-  max-date="{{ maxDate }}" />
+
 <!-- 卡片组件 -->
 <l-card type="cover" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}">
   <view class="content">
@@ -26,9 +25,24 @@
 <l-transition show="{{ notClock }}">
   <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
 </l-transition>
+<!-- 提示信息，打卡完成之后提示 -->
 <l-toast
-  show="{{notClock}}"
+  show="{{!notClock}}"
   icon="success"
   title="成功提示框"
 />
+</view>
+<!-- 查看本月打卡日期 -->
+<view class="clockList">
+<l-button type="success" shape="semicircle" bindtap="showClockList" >打卡日历</l-button>
+<!-- <van-popup show="{{ true }}" bind:close="onClose">
+  <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
+  <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
+</van-popup> -->
+<l-popup show="{{clockList}}" >
+<view class="list">
+  <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
+</view>
+
+</l-popup>
 </view>

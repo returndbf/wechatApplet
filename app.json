@@ -48,8 +48,9 @@
     "l-transition": "/miniprogram_npm/lin-ui/transition/index",
     "l-card": "/miniprogram_npm/lin-ui/card/index",
     "l-switch": "/miniprogram_npm/lin-ui/switch/index",
-    "van-calendar": "@vant/weapp/calendar/index",
-    "van-card": "@vant/weapp/card/index"
+    "l-calendar": "/miniprogram_npm/lin-ui/calendar/index",
+    "l-popup": "/miniprogram_npm/lin-ui/popup/index",
+    "van-popup": "@vant/weapp/popup/index"
   
   },
   "window": {
