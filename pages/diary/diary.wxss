@@ -24,13 +24,33 @@
   background-color: white;
   height: 500rpx;
   width: 500rpx;
-  border-radius: 10%;
+  border-radius: 5%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content:space-around;
   align-content: flex-start;
 }
-.clock{
+.blog{
+  position: relative;
+}
+.blogInsert{
+  background-color: white;
+  height: 600rpx;
+  width: 600rpx;
+  border-radius: 5%;
+  overflow: scroll;
+  position: relative;
+}
+.l-blogTextarea{
+  height:200px;
+}
+
+.notice{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.clock,.blog{
   position: fixed;
   float: right;
   right: 20rpx;
@@ -41,4 +61,5 @@
   float: right;
   right: 20rpx;
   bottom: 30rpx;
+ 
 }
