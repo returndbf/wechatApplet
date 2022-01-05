@@ -41,7 +41,11 @@
 </van-popup> -->
 <l-popup show="{{clockList}}" >
 <view class="list">
-  <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
+  <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button> 
+  <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button> 
+  <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button> 
+  <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button> 
+  <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button> 
 </view>
 
 </l-popup>

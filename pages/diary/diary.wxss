@@ -25,6 +25,10 @@
   height: 500rpx;
   width: 500rpx;
   border-radius: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
 }
 .clock{
   position: fixed;
