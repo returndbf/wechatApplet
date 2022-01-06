@@ -1,50 +1,152 @@
 <!--pages/diary/diary.wxml-->
 <!-- 天气状况 -->
-<view bindtap="show" class="wheather">
-  今日天气：{{wheather}}
+<!-- sticky黏性布局 -->
+<van-sticky>
+<view class="topView">
+  <view style="display:inline">
+    <view bindtap="show" class="wheather">
+      今日天气：{{wheather}}
+    </view>
+    <!-- 天气图标 -->
+    <view class="wheatherIcon">
+      <image src="../../utils/icons/{{wheatherIcon}}.svg" class="icon"></image>
+    </view>
+  </view>
+
+  <view style="display:inline">
+    <!-- 开关组件，控制卡片是否以文本显示 -->
+    <view class="switch">
+      <l-switch bind:linchange="changeType" checked="{{ switchOn }}" />
+    </view>
+    <text class="tips">开启文字卡片</text>
+  </view>
 </view>
-<!-- 天气图标 -->
-<view class="wheatherIcon">
-  <image src="../../utils/icons/{{wheatherIcon}}.svg" class="icon"></image>
-</view>
-<!-- 开关组件，控制卡片是否以文本显示 -->
-<view class="switch">
-  <l-switch bind:linchange="changeType" checked="{{ switchOn }}" />
-</view>
-<text class="tips">开启文字卡片</text>
-<!-- 日历组件 -->
+</van-sticky>
 
 <!-- 卡片组件 -->
-<l-card type="cover" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
-  image-mode="widthFix" plaintext="{{switchOn}}">
-  <view class="content">
-    大笨峰测试卡片
+<view class="cardList">
+  <view class="card">
+  <!-- plaintext是否为文本卡片 -->
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content"> 
+        大笨峰测试卡片
+      </view>
+    </l-card>
   </view>
-</l-card>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="scaleToFill" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="scaleToFill" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+
+  <view class="card">
+    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}"
+      image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+      <view class="content">
+        大笨峰测试卡片
+      </view>
+    </l-card>
+  </view>
+</view>
 
 <view class="clock">
+<!-- notClock未打卡状态，显示按钮 -->
   <l-transition show="{{ notClock }}">
     <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button>
   </l-transition>
   <!-- 提示信息，打卡完成之后提示 -->
-  <l-toast show="{{!notClock}}" icon="success" title="成功提示框" />
+  <l-toast show="{{!notClock}}" icon="success" title="打卡成功~" />
 </view>
 <!-- 查看本月打卡日期 -->
 <view class="clockList">
-  <l-button type="success" shape="semicircle" bindtap="showClockList">打卡日历</l-button>
-  <!-- <van-popup show="{{ true }}" bind:close="onClose">
-  <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
-  <l-button type="default" shape="semicircle" bindtap="clockOn">打卡</l-button> 
-</van-popup> -->
+  <l-button type="success" shape="semicircle" bindtap="showClockList" l-class="clockListBtn">打卡日历</l-button>
   <l-popup show="{{clockList}}" locked="{{fasle}}">
-    <view class="list">
+    <!-- <view class="list">
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
-    </view>
+    </view> -->
+    <view class="clockCalendar">
+    <van-datetime-picker
+  type="year-month"
+  value="{{ currentDate }}"
+  min-date="{{ minDate }}"
+  max-date="{{ maxDate }}"
+  bind:input="onInput"
+  title="选择查看的月份"
+/>
 
+</view>
   </l-popup>
 </view>
 
@@ -52,21 +154,24 @@
   <l-transition show="{{ !notClock }}">
     <l-button type="default" shape="semicircle" bindtap="blogViewShow">写日志</l-button>
   </l-transition>
-  <l-popup show="{{blogPage}}" locked="{{fasle}}" >
+  <l-popup show="{{blogPage}}" locked="{{true}}">
     <view class="blogInsert">
       <l-input label="标题" placeholder="今天心情怎么样？" />
-      <l-textarea placeholder="不要担心这里写不完你的心事" auto-height="{{true}}" maxlength="1000" class="blogTextarea" />
+      <l-textarea placeholder="不要担心这里写不完你的心事" maxlength="1000" l-class="blogTextarea" />
       <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" />
       <view class="commit">
-      <view >
-      <l-button type="default" shape="semicircle" bindtap="submit">提交</l-button>
-    </view>
-    <view >
-      <l-button type="default" shape="semicircle" bindtap="cancel">返回</l-button> 
-    </view>
-  </view>
-      <!-- <van-notice-bar  text="showImage&&showWheatherIcon" color="#1989fa"  background="#ecf9ff" scrollable="{{ false }}" custom-class="notice"/> -->
-      <!-- <l-tag shape="square" l-class="notice">uploadImage?showImage:showWheatherIcon</l-tag> -->
+        <view>
+          <l-button type="default" shape="semicircle" bindtap="submitBlog">提交</l-button>
+        </view>
+        <view>
+          <l-button type="error" shape="semicircle" bindtap="cancelBlog">返回</l-button>
+        </view>
+      </view>
+
+      <!-- <van-notice-bar text="showImage&&showWheatherIcon" color="#1989fa" background="#ecf9ff" scrollable="{{ false }}"
+        custom-class="notice" left-icon="info-o" /> -->
+
+      <l-tag shape="square" l-class="notice" icon="default">showImage || showWheatherIcon</l-tag>
     </view>
 
   </l-popup>

@@ -55,6 +55,8 @@
     "l-tag": "/miniprogram_npm/lin-ui/tag/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-uploader": "@vant/weapp/uploader/index"
   
   },

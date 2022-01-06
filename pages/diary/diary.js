@@ -1,75 +1,89 @@
 // pages/diary/diary.js
-import {checkTextShow} from "./check"
-import {getLocation} from "./getInfo"
+import {
+  checkTextShow
+} from "./check"
+import {
+  getLocation
+} from "./getInfo"
+import {
+  submit,
+  cancel
+} from "./submit"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    longitude:0,//经度
-    latitude:0,//纬度
-    temp:0,//温度
-    wheather:"晴",//天气状况
-    wheatherIcon:null,//天气图标
-    minDate:null ,
+    longitude: 0, //经度
+    latitude: 0, //纬度
+    temp: 0, //温度
+    wheather: "晴", //天气状况
+    wheatherIcon: null, //天气图标
+    minDate: null,
     maxDate: null,
-    switchOn:false,//开关，是否打开文字卡片，true开启
-    title:"123",
-    notClock:true, //是否显示打卡按钮，打卡之后消失，没有打卡为true
-    clockList:false, //打卡日历是否显示
-    blogPage:false
+    switchOn: false, //开关，是否打开文字卡片，true开启
+    title: "123",
+    notClock: true, //是否显示打卡按钮，打卡之后消失，没有打卡为true
+    clockList: false, //打卡日历是否显示
+    blogPage: false
   },
 
-//改变是否以文本显示卡片
-changeType(event){
-  const checked = event.detail.checked //获取ui组件传入的switch开关状态,true打开
-  this.setData({
-    switchOn:checked //switchOn控制显示，是否打开文字卡片
-  })
-  wx.setStorage({
-    key:"switchOn",
-    data: this.data.switchOn
-  })
-  console.log(this.data.switchOn)
-},
+  //改变是否以文本显示卡片
+  changeType(event) {
+    const checked = event.detail.checked //获取ui组件传入的switch开关状态,true打开
+    this.setData({
+      switchOn: checked //switchOn控制显示，是否打开文字卡片
+    })
+    wx.setStorage({
+      key: "switchOn",
+      data: this.data.switchOn
+    })
+    console.log(this.data.switchOn)
+  },
+  submitBlog() {
+    submit(this)
+  },
+  cancelBlog() {
+    cancel(this)
+  },
+  //打卡
+  clockOn() {
+    this.setData({
+      notClock: false
+      // 发送网络请求，请求成功之后弹出窗口
 
-//打卡
-clockOn(){
-  this.setData({
-    notClock:false
-    // 发送网络请求，请求成功之后弹出窗口
+    })
+  },
+  blogViewShow() {
+    this.setData({
+      blogPage: true
+    })
+  },
 
-  })
-},
-blogViewShow(){
-this.setData({
-  blogPage:true
-})
-},
-showClockList(){
-  this.setData({
-    clockList:true
-  })
-},
+  showClockList() {
+    this.setData({
+      clockList: true
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    checkTextShow(this) 
-    getLocation(this)
+    checkTextShow(this) //检查是否卡片显示
+    getLocation(this) //获取坐标天气
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   const minDate = new Date(2022, 1, 2).getTime();
-   const maxDate = new Date(2022, 1, 10).getTime()
-   this.setData({
-     minDate:minDate,
-     maxDate:maxDate
-   })
+    const minDate = new Date(2022, 1, 2).getTime();
+    const maxDate = new Date(2022, 1, 10).getTime()
+    this.setData({
+      minDate: minDate,
+      maxDate: maxDate
+    })
   },
 
   /**
@@ -77,11 +91,11 @@ showClockList(){
    */
   onShow: function () {
     wx.getUserProfile({
-      success: function(res) {
+      success: function (res) {
         console.log(res)
       }
     })
-    
+
   },
 
   /**

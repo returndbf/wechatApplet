@@ -1,4 +1,11 @@
 /* pages/diary/diary.wxss */
+.topView{
+  display: flex;
+  justify-content: space-around;
+  /* position: sticky;  黏性定位，滚动吸顶，必须设置top，left，right，bottom最少其一才可生效
+  top: 0;
+  z-index: 100; */
+}
 .wheather{
   display: inline-block;
 }
@@ -17,10 +24,22 @@
   display: inline-block;
   vertical-align: middle;
 }
-.l-title-class{
-  width: 100rpx;
+
+.clockListBtn{
+  z-index: -1;
 }
-.list{
+.cardList{
+  position: relative;
+}
+.card{
+  margin-bottom: 20rpx;
+  
+}
+.cardImg{
+  max-height: 100rpx;
+  max-width: 100rpx;
+}
+/* .list{
   background-color: white;
   height: 500rpx;
   width: 500rpx;
@@ -29,28 +48,35 @@
   flex-wrap: wrap;
   justify-content:space-around;
   align-content: flex-start;
+} */
+.clockCalendar{
+  width: 600rpx;
+  height: 600rpx;
 }
 .blog{
   position: relative;
 }
 .blogInsert{
   background-color: white;
-  height: 600rpx;
+  height: 1000rpx;
   width: 600rpx;
   border-radius: 5%;
   overflow:scroll;
   position: relative;
   
 }
+.blogTextarea{
+ height: 550rpx;
+}
 
-
-/* .notice{
+.notice{
   width: 100%;
-  position: fixed;
-} */
+  position: absolute;
+  bottom: 0;
+}
 .commit{
   position: relative;
-  top: 50rpx;
+  top: 20rpx;
   display: flex;
   justify-content: space-evenly;
 }
