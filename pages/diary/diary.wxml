@@ -50,15 +50,23 @@
 
 <view class="blog">
   <l-transition show="{{ !notClock }}">
-    <l-button type="default" shape="semicircle" bindtap="clockOn">写日志</l-button>
+    <l-button type="default" shape="semicircle" bindtap="blogViewShow">写日志</l-button>
   </l-transition>
-  <l-popup show="{{true}}" locked="{{fasle}}" >
+  <l-popup show="{{blogPage}}" locked="{{fasle}}" >
     <view class="blogInsert">
       <l-input label="标题" placeholder="今天心情怎么样？" />
       <l-textarea placeholder="不要担心这里写不完你的心事" auto-height="{{true}}" maxlength="1000" class="blogTextarea" />
       <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" />
-      <!-- <van-notice-bar  text="uploadImage?showImage:showWheatherIcon" color="#1989fa"  background="#ecf9ff" scrollable="{{ false }}" custom-class="notice"/> -->
-      <l-tag shape="square" l-class="notice">uploadImage?showImage:showWheatherIcon</l-tag>
+      <view class="commit">
+      <view >
+      <l-button type="default" shape="semicircle" bindtap="submit">提交</l-button>
+    </view>
+    <view >
+      <l-button type="default" shape="semicircle" bindtap="cancel">返回</l-button> 
+    </view>
+  </view>
+      <!-- <van-notice-bar  text="showImage&&showWheatherIcon" color="#1989fa"  background="#ecf9ff" scrollable="{{ false }}" custom-class="notice"/> -->
+      <!-- <l-tag shape="square" l-class="notice">uploadImage?showImage:showWheatherIcon</l-tag> -->
     </view>
 
   </l-popup>

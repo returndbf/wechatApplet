@@ -17,7 +17,8 @@ Page({
     switchOn:false,//开关，是否打开文字卡片，true开启
     title:"123",
     notClock:true, //是否显示打卡按钮，打卡之后消失，没有打卡为true
-    clockList:false //打卡日历是否显示
+    clockList:false, //打卡日历是否显示
+    blogPage:false
   },
 
 //改变是否以文本显示卡片
@@ -40,6 +41,11 @@ clockOn(){
     // 发送网络请求，请求成功之后弹出窗口
 
   })
+},
+blogViewShow(){
+this.setData({
+  blogPage:true
+})
 },
 showClockList(){
   this.setData({

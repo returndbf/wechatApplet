@@ -49,6 +49,9 @@ Page({
   catchTouchMove() {
     return false;
   },
+  onReady(){
+
+  },
   start() {
     this.setData({
       play: !this.data.play,
