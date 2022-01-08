@@ -46,7 +46,8 @@ Page({
     sentence: "",//存储显示和复制的数据
     modalDisplay: true,//弹窗显示，true为隐藏，false为显示
     inputSentence: "",//存储文本框中的数据
-    word: ""//暗号
+    word: "",//暗号
+    disabled:true
   },
   //切换句子的方法
   change() {

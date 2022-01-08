@@ -11,13 +11,13 @@
 
 <!-- <button bindtap="change" id="change" style="width:280rpx;border-radius: 50px">换一个</button> -->
 <view class="center-btn">
-  <l-button type="default" bindtap="change" id="change" shape="semicircle" size="medium" width="250" height="90">换一个</l-button>
+  <l-button type="default" bindtap="change" id="change" shape="semicircle" size="medium" width="250" height="90" disabled="{{true}}">换一个</l-button>
   <l-button type="success" bindtap="copy" id="copy" shape="semicircle" size="medium" width="250" height="90">复制这个</l-button>
 </view>
 
 <view id="add">
   <l-button type="error" bindtap="add" shape="semicircle" size="large" width="250" height="90">添加彩虹屁</l-button>
 </view>
-
-<!-- <button bindtap="copy" id="copy" style="width:280rpx;border-radius: 50px">复制这个</button>
+<l-textarea indicator="{{true}}" maxlength="140" placeholder="说说你的想法吧..."  />
+<!-- <button bindtap="copy" id="copy" style="width:280rpx;border-radius: 50px" disabled="{{disabled}}">复制这个</button >
 <button bindtap="add" id="add" style="width:280rpx;border-radius: 50px">添加彩虹屁</button> -->

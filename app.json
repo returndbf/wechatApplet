@@ -57,7 +57,10 @@
     "van-notice-bar": "@vant/weapp/notice-bar/index",
     "van-sticky": "@vant/weapp/sticky/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-uploader": "@vant/weapp/uploader/index"
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-button": "@vant/weapp/button/index",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-popup": "tdesign-miniprogram/popup/popup"
   
   },
   "window": {

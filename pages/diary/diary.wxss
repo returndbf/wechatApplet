@@ -26,10 +26,11 @@
 }
 
 .clockListBtn{
-  z-index: -1;
+ 
 }
 .cardList{
   position: relative;
+  
 }
 .card{
   margin-bottom: 20rpx;
@@ -53,20 +54,24 @@
   width: 600rpx;
   height: 600rpx;
 }
-.blog{
-  position: relative;
+.insertBlog{
+  
+}
+.blogInsertPopup{
+  z-index: 100;
 }
 .blogInsert{
   background-color: white;
   height: 1000rpx;
   width: 600rpx;
-  border-radius: 5%;
+  
   overflow:scroll;
   position: relative;
   
 }
 .blogTextarea{
  height: 550rpx;
+ overflow: scroll;
 }
 
 .notice{
