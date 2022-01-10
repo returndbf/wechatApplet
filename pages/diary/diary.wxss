@@ -2,6 +2,7 @@
 .topView{
   display: flex;
   justify-content: space-around;
+  background-color: #fff;
   /* position: sticky;  黏性定位，滚动吸顶，必须设置top，left，right，bottom最少其一才可生效
   top: 0;
   z-index: 100; */
@@ -62,10 +63,10 @@
 }
 .blogInsert{
   background-color: white;
-  height: 1000rpx;
+  height: 1100rpx;
   width: 600rpx;
   
-  overflow:scroll;
+  overflow:hidden;
   position: relative;
   
 }
@@ -75,13 +76,14 @@
 }
 
 .notice{
-  width: 100%;
+  width: 600rpx;
+  overflow: hidden;
   position: absolute;
   bottom: 0;
 }
 .commit{
   position: relative;
-  top: 20rpx;
+  top: 50rpx;
   display: flex;
   justify-content: space-evenly;
 }

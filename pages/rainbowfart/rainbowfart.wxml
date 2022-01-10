@@ -18,6 +18,6 @@
 <view id="add">
   <l-button type="error" bindtap="add" shape="semicircle" size="large" width="250" height="90">添加彩虹屁</l-button>
 </view>
-<l-textarea indicator="{{true}}" maxlength="140" placeholder="说说你的想法吧..."  />
+
 <!-- <button bindtap="copy" id="copy" style="width:280rpx;border-radius: 50px" disabled="{{disabled}}">复制这个</button >
 <button bindtap="add" id="add" style="width:280rpx;border-radius: 50px">添加彩虹屁</button> -->

@@ -1,14 +1,21 @@
 // pages/diary/diary.js
 import {
-  checkTextShow
+  httpRequest
+} from "../../utils/request"
+import {
+  checkTextShow,
+  checkLogin,
+  checkClock
 } from "./check"
 import {
-  getLocation
+  getLocation,
+  userLogin
 } from "./getInfo"
 import {
   submit,
   cancel
 } from "./submit"
+import { debounce } from "../../utils/debounce";
 Page({
 
   /**
@@ -24,9 +31,15 @@ Page({
     maxDate: null,
     switchOn: false, //开关，是否打开文字卡片，true开启
     title: "123",
-    notClock: true, //是否显示打卡按钮，打卡之后消失，没有打卡为true
+    notClock: false, //是否显示打卡按钮，打卡之后消失，没有打卡为true
     clockList: false, //打卡日历是否显示
-    blogPage: false
+    blogPage: false, //写日志弹窗
+    userId: null, //后端用户id
+    userOpenId: null,//用户openid
+    clockDays:0, //打卡日期
+    blogTitle:"", // 日志标题
+    blogContent:"",//日志内容
+    blogImg: null,
   },
 
   //改变是否以文本显示卡片
@@ -42,30 +55,93 @@ Page({
     console.log(this.data.switchOn)
   },
   submitBlog() {
-    submit(this)
+      submit(this)
+
+    
   },
   cancelBlog() {
     cancel(this)
   },
   //打卡
   clockOn() {
-    this.setData({
-      notClock: false
+    // wx.request({
+    //   url: 'http://localhost:80/userClock',
+    // })
+    wx.getStorage({
+      key: "userId"
+    }).then(res => {
+      this.setData({
+        userId: res.data
+      })
+      const data = {
+        userId: res.data
+      }
       // 发送网络请求，请求成功之后弹出窗口
-
+      httpRequest("http://localhost:80/userClock", data, 1).then(res => {
+        console.log(res)//打卡天数
+        wx.showToast({
+          title: '打卡成功，总打卡天数:'+res,
+          icon:"none"
+        })
+        this.setData({
+          clockDays:res,
+          notClock: false
+        })
+      }).catch(err => {
+      })
+    }).catch(err => {
+      wx.showToast({
+        title: '本地用户信息不存在',
+      })
     })
+
+
+    // wx.getUserProfile({
+    //   desc: "测试",
+    //   success(res) {
+    //     console.log(res)
+    //   },
+    //   fail(err) {
+    //     console.log(err)
+    //   }
+    // })
   },
+  titleInsert(event){
+    //console.log(event.detail.value)
+      this.setData({
+        blogTitle:event.detail.value
+      })
+      console.log(this.data.blogTitle)
+
+  },
+  contentInsert(event){
+    
+    this.setData({
+      blogContent:event.detail.value
+    })
+    console.log(this.data.blogContent)
+  },
+  //显示日志弹窗
   blogViewShow() {
     this.setData({
       blogPage: true
     })
   },
+  //插入图片
+  insertImg(event) {
 
-  showClockList() {
-    if(!this.data.blogPage){
     this.setData({
-      clockList: true
+      blogImg: event.detail.current[0]
     })
+    console.log(this.data.blogImg)
+
+  },
+  //日志列表
+  showClockList() {
+    if (!this.data.blogPage) {
+      this.setData({
+        clockList: true
+      })
 
     }
   },
@@ -73,14 +149,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("onload")
     checkTextShow(this) //检查是否卡片显示
     getLocation(this) //获取坐标天气
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log("onready")
     const minDate = new Date(2022, 1, 2).getTime();
     const maxDate = new Date(2022, 1, 10).getTime()
     this.setData({
@@ -89,15 +168,13 @@ Page({
     })
   },
 
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.getUserProfile({
-      success: function (res) {
-        console.log(res)
-      }
-    })
+    checkLogin(this)
+    checkClock(this)
 
   },
 
@@ -105,14 +182,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log("onhide")
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log("onunload")
   },
 
   /**

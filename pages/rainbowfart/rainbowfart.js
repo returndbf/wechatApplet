@@ -1,7 +1,7 @@
 // pages/rainbowfart/rainbowfart.js
 const db = wx.cloud.database()
 let sentences = db.collection('sentences')
-
+//import {httprRequest} from "../../utils/request"
 Page({
   /**
    * 页面的初始数据
@@ -55,6 +55,11 @@ Page({
     //随机获取颜色数组中一条数据下标
     let randomColor = Math.floor(Math.random() * this.data.colors.length)
     //从https://dabenfeng.top/后端获取数据
+    // httprRequest("https://dabenfeng.top/rainbowFart/randomRainbowFart","",1).then(res=>console.log(res)).catch(err=>{
+    //   wx.showToast({
+    //     title: err;
+    //   })
+    // })
     wx.request({
       url: 'https://dabenfeng.top/rainbowFart/randomRainbowFart',
       header:{
@@ -62,6 +67,7 @@ Page({
       },
       //箭头函数为了修改this指向
       success:(res)=>{
+        console.log(res)
         this.setData({
           //res.data为调用接口返回值
           sentence:res.data.data.sentence,
@@ -117,15 +123,9 @@ Page({
   //添加彩虹屁按钮
   //暂时先不使用
   add() {
-    wx.getSystemInfo({
-      success (res) {
-        console.log(res.model)
-        console.log(res.pixelRatio)
-        console.log(res.windowWidth)
-        console.log(res.screenHeight)
-        console.log(res.language)
-        console.log(res.version)
-        console.log(res.platform)
+    wx.chooseMedia({
+      success(res){
+        console.log(res)
       }
     })
   //  const deviceInfo = wx.getDeviceInfo()

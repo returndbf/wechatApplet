@@ -53,14 +53,14 @@
     "l-input": "/miniprogram_npm/lin-ui/input/index",
     "l-textarea": "/miniprogram_npm/lin-ui/textarea/index",
     "l-tag": "/miniprogram_npm/lin-ui/tag/index",
+    "l-image-picker": "/miniprogram_npm/lin-ui/image-picker/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-notice-bar": "@vant/weapp/notice-bar/index",
     "van-sticky": "@vant/weapp/sticky/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-uploader": "@vant/weapp/uploader/index",
-    "van-button": "@vant/weapp/button/index",
-    "t-textarea": "tdesign-miniprogram/textarea/textarea",
-    "t-popup": "tdesign-miniprogram/popup/popup"
+    "van-button": "@vant/weapp/button/index"
+
   
   },
   "window": {

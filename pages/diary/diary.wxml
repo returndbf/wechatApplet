@@ -116,7 +116,7 @@
     <l-button type="default" shape="semicircle" bindtap="clockOn"> 打卡</l-button>
   </l-transition>
   <!-- 提示信息，打卡完成之后提示 -->
-  <l-toast show="{{!notClock}}" icon="success" title="打卡成功~" />
+  <!-- <l-toast show="{{!notClock}}" icon="success" title="今日已打卡,已打卡天数：{{clockDays}}" /> -->
 </view>
 
 <!-- 写日志按钮 -->
@@ -129,9 +129,10 @@
 <!-- 写日志弹窗 -->
 <van-popup show="{{blogPage}}" locked="{{true}}" l-class="blogInsertPopup" round lock-scroll>
   <view class="blogInsert">
-    <l-input label="标题" placeholder="今天心情怎么样？" />
-    <l-textarea placeholder="不要担心这里写不完你的心事" maxlength="1000" l-class="blogTextarea" />
-    <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" />
+    <l-input label="标题" placeholder="今天心情怎么样？"  required="{{true}}" bind:lininput="titleInsert"/>
+    <l-textarea placeholder="说说发生的有趣的事情" maxlength="1000" l-class="blogTextarea"  value="{{bolgTitle}}" bind:lininput="contentInsert" />
+    <!-- <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" /> -->
+    <l-image-picker size="4" bind:linchange="onChangeTap" preview="{{true}}" count="1" urls=""  bind:linchange="insertImg"/>
     <view class="commit">
       <view>
         <l-button type="default" shape="semicircle" bindtap="submitBlog">提交</l-button>
@@ -148,7 +149,7 @@
 
 <!-- 打卡日历按钮-->
 <view class="clockList">
-  <l-button type="success" shape="semicircle" bindtap="showClockList" l-class="clockListBtn">打卡日历</l-button>
+  <l-button type="success" shape="semicircle" bindtap="showClockList" l-class="clockListBtn">日志列表</l-button>
 </view>
 <!-- 打卡日历弹窗 -->
 <l-popup show="{{clockList}}" locked="{{false}}">
