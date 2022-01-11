@@ -1,10 +1,17 @@
 //封装网络请求，返回promise
 export function httpRequest(url, params = "", successCode, method = "get") {
+  let header = null;
+  if(method =="post"){
+    header={
+      'content-type':'application/x-www-form-urlencoded'
+    }
+  }
   return new Promise((resolve, reject) => {
     wx.request({
       url: url,
       data: params,
       method: method,
+      header:header,
       success: res => {
         if (res.data.code == successCode) {
           resolve(res.data.data)

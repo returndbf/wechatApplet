@@ -25,8 +25,8 @@ Page({
     longitude: 0, //经度
     latitude: 0, //纬度
     temp: 0, //温度
-    wheather: "晴", //天气状况
-    wheatherIcon: null, //天气图标
+    weather: "晴", //天气状况
+    weatherIcon: "100", //天气图标
     minDate: null,
     maxDate: null,
     switchOn: false, //开关，是否打开文字卡片，true开启
@@ -39,7 +39,7 @@ Page({
     clockDays:0, //打卡日期
     blogTitle:"", // 日志标题
     blogContent:"",//日志内容
-    blogImg: null,
+    blogImg: null,//日志图片
   },
 
   //改变是否以文本显示卡片
@@ -56,17 +56,12 @@ Page({
   },
   submitBlog() {
       submit(this)
-
-    
   },
   cancelBlog() {
     cancel(this)
   },
   //打卡
   clockOn() {
-    // wx.request({
-    //   url: 'http://localhost:80/userClock',
-    // })
     wx.getStorage({
       key: "userId"
     }).then(res => {
@@ -94,18 +89,8 @@ Page({
         title: '本地用户信息不存在',
       })
     })
-
-
-    // wx.getUserProfile({
-    //   desc: "测试",
-    //   success(res) {
-    //     console.log(res)
-    //   },
-    //   fail(err) {
-    //     console.log(err)
-    //   }
-    // })
   },
+  //添加日志标题
   titleInsert(event){
     //console.log(event.detail.value)
       this.setData({
@@ -114,8 +99,8 @@ Page({
       console.log(this.data.blogTitle)
 
   },
+  //添加日志内容
   contentInsert(event){
-    
     this.setData({
       blogContent:event.detail.value
     })
@@ -123,18 +108,46 @@ Page({
   },
   //显示日志弹窗
   blogViewShow() {
-    this.setData({
-      blogPage: true
+    wx.getStorage({
+      key:"userId"
+    }).then(res=>{
+      const data = {
+        userId : res.data
+      }
+      //校验今日日志数量
+      httpRequest("http://localhost:80/checkUserTodayBlogsCount",data,1).then(res=>{
+        if(res!=false){
+          this.setData({
+            blogPage: true
+          })
+        }else{
+          wx.showToast({
+            icon:"error",
+            title: "今日日志已上限",
+          })
+        }
+      })
+    }).catch(err=>{
+      wx.showToast({
+        icon:"error",
+        title: "本地用户信息不存在",
+      })
     })
+    
   },
   //插入图片
   insertImg(event) {
-
     this.setData({
       blogImg: event.detail.current[0]
     })
     console.log(this.data.blogImg)
-
+  },
+  //删除图片
+  removeImg(){
+    console.log(123)
+    this.setData({
+      blogImg:null
+    })
   },
   //日志列表
   showClockList() {
@@ -175,7 +188,7 @@ Page({
   onShow: function () {
     checkLogin(this)
     checkClock(this)
-
+    
   },
 
   /**

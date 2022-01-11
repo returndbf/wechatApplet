@@ -7,7 +7,7 @@
   top: 0;
   z-index: 100; */
 }
-.wheather{
+.weather{
   display: inline-block;
 }
 .icon{
@@ -21,7 +21,7 @@
 .tips{
   float: right;
 }
-.wheatherIcon{
+.weatherIcon{
   display: inline-block;
   vertical-align: middle;
 }

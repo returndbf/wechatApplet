@@ -47,12 +47,10 @@ export function checkClock(that) {
 export function checkLogin(that) {
   //登录
   wx.getStorage({
-    key: "userOpenId",
+    key: "userId",
     success: (res => { //获取成功就弹窗欢迎回来
       if (res.data) {
-        wx.showToast({
-          title: '欢迎回来',
-        })
+        
       }
     }),
     fail: (err => { //获取失败就进行登录操作，登录操作即：将用户信息存储在storage

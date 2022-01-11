@@ -4,12 +4,12 @@
 <van-sticky>
   <view class="topView">
     <view style="display:inline">
-      <view bindtap="show" class="wheather">
-        今日天气：{{wheather}}
+      <view bindtap="show" class="weather">
+        今日天气：{{weather}}
       </view>
       <!-- 天气图标 -->
-      <view class="wheatherIcon">
-        <image src="../../utils/icons/{{wheatherIcon}}.svg" class="icon"></image>
+      <view class="weatherIcon">
+        <image src="../../utils/icons/{{weatherIcon}}.svg" class="icon"></image>
       </view>
     </view>
 
@@ -129,11 +129,11 @@
 <!-- 写日志弹窗 -->
 <van-popup show="{{blogPage}}" locked="{{true}}" l-class="blogInsertPopup" round lock-scroll>
   <view class="blogInsert">
-    <l-input label="标题" placeholder="今天心情怎么样？"  required="{{true}}" bind:lininput="titleInsert"/>
-    <l-textarea placeholder="说说发生的有趣的事情" maxlength="1000" l-class="blogTextarea"  value="{{bolgTitle}}" bind:lininput="contentInsert" />
+    <l-input label="标题" placeholder="今天心情怎么样？"  required="{{true}}"    value= "{{blogTitle}}"bind:lininput="titleInsert" />
+    <l-textarea placeholder="说说发生的有趣的事情" maxlength="1000" l-class="blogTextarea"  bind:lininput="contentInsert"  value = "{{blogContent}}"/>
     <!-- <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" /> -->
-    <l-image-picker size="4" bind:linchange="onChangeTap" preview="{{true}}" count="1" urls=""  bind:linchange="insertImg"/>
-    <view class="commit">
+    <l-image-picker size="4"  preview="{{true}}" count="1" urls=""  bind:linchange="insertImg" bind:linremove="removeImg" id="imgUploader"/>
+    <view class="commit" >
       <view>
         <l-button type="default" shape="semicircle" bindtap="submitBlog">提交</l-button>
       </view>
