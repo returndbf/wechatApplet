@@ -1,6 +1,9 @@
 import {
   httpRequest
 } from "../../utils/request";
+import{
+  getBlogByMonth
+} from "../diary/getInfo"
 export function submit(that) {
   wx.getStorage({
     key: "userId" //获取本地存储的userId
@@ -37,14 +40,15 @@ export function submit(that) {
               title: '上传成功',
             }).then(res => { //提示框结束之后关闭日志窗口
               that.setData({
-                blogTitle: "",
+                blogTitle: "", //清除文本内容
                 blogContent: "",
-                blogImg: null,
-                blogPage: false
+                blogImg: null, //清除图片地址
+                blogPage: false //关闭页面
               })
               const toast = that.selectComponent('#imgUploader');
               console.log(toast)
-              toast.linClearImage()
+              toast.linClearImage() //清除图片
+              getBlogByMonth(that,new Date().getFullYear(),new Date().getMonth()+1)
             })
           })
         },
@@ -66,8 +70,12 @@ export function submit(that) {
             title: '上传成功',
           }).then(res => { //提示框结束之后关闭日志窗口
             that.setData({
+              blogTitle: "", //清除文本内容
+                blogContent: "",
+                blogImg: null, //清除图片地址
               blogPage: false
             })
+            getBlogByMonth(that,new Date().getFullYear(),new Date().getMonth()+1)
           })
         })
       }).catch(err => {

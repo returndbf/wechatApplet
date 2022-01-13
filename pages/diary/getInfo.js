@@ -1,6 +1,7 @@
 import {
   httpRequest
 } from "../../utils/request"
+import {blog} from "./blogClass"
 //获取天气信息
 export function getLocation(that) {
   wx.getLocation({
@@ -21,8 +22,8 @@ export function getLocation(that) {
           console.log(res)
           that.setData({
             temp: res.data.now.temp, //气温
-            wheather: res.data.now.text, //天气状况
-            wheatherIcon: res.data.now.icon //图标
+            weather: res.data.now.text, //天气状况
+            weatherIcon: res.data.now.icon //图标
           })
           //return res.data.now.temp
         },
@@ -75,7 +76,6 @@ export function userLogin(that) {
               }),
               that.setData({
                 userOpenId: res.data.data,
-                title: 321
               })
             console.log(that.data.userOpenId)
             resolve("登录成功")
@@ -90,3 +90,60 @@ export function userLogin(that) {
     })
   })
 };
+//获取blog详情
+export function getBlogDetail(that){
+  httpRequest("http://localhost:80/wxLogin")
+}
+//获取当前月份
+export function getCurrentMonth(that){
+  return new Promise((resolve,reject)=>{
+    const  date =  new  Date();
+    const  month = date.getMonth() + 1;
+    const year = date.getFullYear()
+    that.setData({
+      selectedMonth:month,
+      selectYear:year
+    })
+    const blogTime = {year:year,month:month}
+    resolve(blogTime)
+  })
+  
+}
+//获取某个月份的blog
+export function getBlogByMonth(that,year,month){
+  wx.getStorage({
+    key:"userId"
+  }).then(res=>{
+    const data = {
+      userId:res.data,
+      uploadMonth:month,
+      uploadYear:year
+    }
+    httpRequest("http://localhost:80/selectBlogsByMonth",data,1).then(res=>{
+      that.setData({
+        monthBlogs:[]
+      })
+      res.map(item=>{
+        const blogObj = new blog(item.id,item.userId,item.uploadTime,item.title,item.content,item.img,item.uploadMonth,item.weather,item.weatherIcon)
+        if(!item.img){
+          blogObj.img =`https://pic.dabenfeng.top/${item.weatherIcon}.svg` 
+        }
+        that.data.monthBlogs.push(blogObj)
+      })
+      that.setData({
+        monthBlogs:that.data.monthBlogs
+      })
+      console.log(that.data.monthBlogs)
+    })
+  })
+  
+  
+};
+export function timestampToYear(timestamp){
+  const date = new Date(timestamp)
+  return date.getFullYear()
+};
+export function timestampToMonth(timestamp){
+  const date = new Date(timestamp);
+  return date.getMonth()+1
+}

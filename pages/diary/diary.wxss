@@ -38,6 +38,8 @@
   
 }
 .cardImg{
+  width: 100rpx;
+  height: 100rpx;
   max-height: 100rpx;
   max-width: 100rpx;
 }
@@ -58,10 +60,10 @@
 .insertBlog{
   
 }
-.blogInsertPopup{
+.blogInsertPopup,.blogViewPopup{
   z-index: 100;
 }
-.blogInsert{
+.blogInsert,.blogView{
   background-color: white;
   height: 1100rpx;
   width: 600rpx;
@@ -73,6 +75,19 @@
 .blogTextarea{
  height: 550rpx;
  overflow: scroll;
+}
+.viewBlogTitle{
+  display: inline;
+}
+.viewBlogIcon{
+  display: inline;
+  position: absolute;
+  right: 10rpx;
+  top: 20rpx;
+  z-index: 1000;
+}
+.viewBlogTextarea{
+  height: 600rpx;
 }
 
 .notice{

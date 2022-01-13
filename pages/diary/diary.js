@@ -9,13 +9,20 @@ import {
 } from "./check"
 import {
   getLocation,
-  userLogin
+  userLogin,
+  getCurrentMonth,
+  getBlogByMonth,
+  getBlogDetail,
+  timestampToMonth,
+  timestampToYear
 } from "./getInfo"
 import {
   submit,
   cancel
 } from "./submit"
-import { debounce } from "../../utils/debounce";
+import {
+  debounce
+} from "../../utils/debounce";
 Page({
 
   /**
@@ -30,18 +37,62 @@ Page({
     minDate: null,
     maxDate: null,
     switchOn: false, //开关，是否打开文字卡片，true开启
-    title: "123",
+    title: "大笨峰", // blog标题
     notClock: false, //是否显示打卡按钮，打卡之后消失，没有打卡为true
     clockList: false, //打卡日历是否显示
     blogPage: false, //写日志弹窗
     userId: null, //后端用户id
-    userOpenId: null,//用户openid
-    clockDays:0, //打卡日期
-    blogTitle:"", // 日志标题
-    blogContent:"",//日志内容
-    blogImg: null,//日志图片
+    userOpenId: null, //用户openid
+    clockDays: 0, //打卡日期
+    blogTitle: "", // 日志标题
+    blogContent: "", //日志内容
+    blogImg: null, //日志图片
+    selectedMonth: 1, //选择的月份
+    selectedYear: 2022, //选择的年份
+    monthBlogs: [], //月份里的所有blog
+    viewBlogTitle: "", //目前查看的blog标题
+    viewBlogContent: "", //目前查看的blog内容
+    viewBlogImg: null, //目前查看的blog图片
+    viewBlogWeatherIcon: "100", //目前查看的blog天气图标
+    viewBlogUploadTime: "", //目前查看的blog上传日期
+    viewBlogPage: false //日志详情弹窗
   },
 
+  showBlog(event) {
+    console.log(event.currentTarget.dataset.id)
+    const blogId = event.currentTarget.dataset.id
+    const blog = this.data.monthBlogs.find(item => {
+      return item.id == blogId
+    })
+    console.log(blog)
+    this.setData({
+      viewBlogPage: true, //日志详情弹窗
+      viewBlogTitle: blog.title, //目前查看的blog标题
+      viewBlogContent: blog.content, //目前查看的blog内容
+      viewBlogImg: blog.img, //目前查看的blog图片
+      viewBlogWeatherIcon: blog.weatherIcon, //目前查看的blog天气图标
+      viewBlogUploadTime: blog.uploadTime //目前查看的blog上传日期
+
+    })
+  },
+  viewImgDetail(){
+    if(this.data.viewBlogImg.includes("dabenfeng.top")){
+      wx.showToast({
+        title: '此图标无法查看',
+        icon:"error"
+      })
+      return
+    }
+    wx.previewImage({
+      urls: new Array(this.data.viewBlogImg)
+    })
+  },
+  closeBlogPage(){
+    console.log(1)
+    this.setData({
+      viewBlogPage:false
+    })
+  },
   //改变是否以文本显示卡片
   changeType(event) {
     const checked = event.detail.checked //获取ui组件传入的switch开关状态,true打开
@@ -55,7 +106,7 @@ Page({
     console.log(this.data.switchOn)
   },
   submitBlog() {
-      submit(this)
+    submit(this)
   },
   cancelBlog() {
     cancel(this)
@@ -73,17 +124,16 @@ Page({
       }
       // 发送网络请求，请求成功之后弹出窗口
       httpRequest("http://localhost:80/userClock", data, 1).then(res => {
-        console.log(res)//打卡天数
+        console.log(res) //打卡天数
         wx.showToast({
-          title: '打卡成功，总打卡天数:'+res,
-          icon:"none"
+          title: '打卡成功，总打卡天数:' + res,
+          icon: "none"
         })
         this.setData({
-          clockDays:res,
+          clockDays: res,
           notClock: false
         })
-      }).catch(err => {
-      })
+      }).catch(err => {})
     }).catch(err => {
       wx.showToast({
         title: '本地用户信息不存在',
@@ -91,49 +141,49 @@ Page({
     })
   },
   //添加日志标题
-  titleInsert(event){
+  titleInsert(event) {
     //console.log(event.detail.value)
-      this.setData({
-        blogTitle:event.detail.value
-      })
-      console.log(this.data.blogTitle)
+    this.setData({
+      blogTitle: event.detail.value
+    })
+    console.log(this.data.blogTitle)
 
   },
   //添加日志内容
-  contentInsert(event){
+  contentInsert(event) {
     this.setData({
-      blogContent:event.detail.value
+      blogContent: event.detail.value
     })
     console.log(this.data.blogContent)
   },
   //显示日志弹窗
   blogViewShow() {
     wx.getStorage({
-      key:"userId"
-    }).then(res=>{
+      key: "userId"
+    }).then(res => {
       const data = {
-        userId : res.data
+        userId: res.data
       }
       //校验今日日志数量
-      httpRequest("http://localhost:80/checkUserTodayBlogsCount",data,1).then(res=>{
-        if(res!=false){
+      httpRequest("http://localhost:80/checkUserTodayBlogsCount", data, 1).then(res => {
+        if (res != false) {
           this.setData({
             blogPage: true
           })
-        }else{
+        } else {
           wx.showToast({
-            icon:"error",
+            icon: "error",
             title: "今日日志已上限",
           })
         }
       })
-    }).catch(err=>{
+    }).catch(err => {
       wx.showToast({
-        icon:"error",
+        icon: "error",
         title: "本地用户信息不存在",
       })
     })
-    
+
   },
   //插入图片
   insertImg(event) {
@@ -143,10 +193,10 @@ Page({
     console.log(this.data.blogImg)
   },
   //删除图片
-  removeImg(){
+  removeImg() {
     console.log(123)
     this.setData({
-      blogImg:null
+      blogImg: null
     })
   },
   //日志列表
@@ -158,13 +208,38 @@ Page({
 
     }
   },
+  // onInput(event){
+  //   console.log(event)
+  // },
+  //日志列表弹窗选择的年月
+  getSelectedMonth(detail) {
+    console.log(detail.detail)
+    const year = timestampToYear(detail.detail);
+    const month = timestampToMonth(detail.detail);
+    getBlogByMonth(this, year, month);
+    this.setData({
+      clockList: false
+    })
+  },
+  hideClockList() {
+    this.setData({
+      clockList: false
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log("onload")
+    checkLogin(this).then(res => {
+      //获取当前月份
+      getCurrentMonth(this).then(res => {
+        getBlogByMonth(this, res.year, res.month)
+      })
+    })
+
     checkTextShow(this) //检查是否卡片显示
-    getLocation(this) //获取坐标天气
+
 
   },
 
@@ -173,8 +248,8 @@ Page({
    */
   onReady: function () {
     console.log("onready")
-    const minDate = new Date(2022, 1, 2).getTime();
-    const maxDate = new Date(2022, 1, 10).getTime()
+    const minDate = new Date(2022, 1, 0).getTime();
+    const maxDate = new Date(2030, 12, 0).getTime()
     this.setData({
       minDate: minDate,
       maxDate: maxDate
@@ -186,9 +261,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    checkLogin(this)
+
     checkClock(this)
-    
+    getLocation(this) //获取坐标天气
+
   },
 
   /**

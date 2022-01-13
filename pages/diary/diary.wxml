@@ -25,83 +25,12 @@
 
 <!-- 卡片组件 -->
 <view class="cardList">
-  <view class="card">
+  <view class="card" wx:for="{{monthBlogs}}" wx:for-item="item">
     <!-- plaintext是否为文本卡片 -->
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
+    <l-card type="primary" image="{{item.img}}" title="{{item.title}}" image-mode="widthFix" plaintext="{{switchOn}}"
+      l-img-class="cardImg" bindtap="showBlog" data-id="{{item.id}}">
       <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="scaleToFill" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="scaleToFill" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
-      </view>
-    </l-card>
-  </view>
-
-  <view class="card">
-    <l-card type="primary" image="https://static.7ait.com/2021/10/17/8afbe68f3bbe4.png" title="{{title}}" image-mode="widthFix" plaintext="{{switchOn}}" l-img-class="cardImg">
-      <view class="content">
-        大笨峰测试卡片
+        {{item.uploadTime}}
       </view>
     </l-card>
   </view>
@@ -127,13 +56,15 @@
 </view>
 
 <!-- 写日志弹窗 -->
-<van-popup show="{{blogPage}}" locked="{{true}}" l-class="blogInsertPopup" round lock-scroll>
+<van-popup show="{{blogPage}}" l-class="blogInsertPopup" round lock-scroll>
   <view class="blogInsert">
-    <l-input label="标题" placeholder="今天心情怎么样？"  required="{{true}}"    value= "{{blogTitle}}"bind:lininput="titleInsert" />
-    <l-textarea placeholder="说说发生的有趣的事情" maxlength="1000" l-class="blogTextarea"  bind:lininput="contentInsert"  value = "{{blogContent}}"/>
+    <l-input label="标题" placeholder="今天心情怎么样？" required="{{true}}" value="{{blogTitle}}" bind:lininput="titleInsert" />
+    <l-textarea placeholder="说说发生的有趣的事情" maxlength="1000" l-class="blogTextarea" bind:lininput="contentInsert"
+      value="{{blogContent}}" />
     <!-- <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" /> -->
-    <l-image-picker size="4"  preview="{{true}}" count="1" urls=""  bind:linchange="insertImg" bind:linremove="removeImg" id="imgUploader"/>
-    <view class="commit" >
+    <l-image-picker size="4" preview="{{true}}" count="1" urls="" bind:linchange="insertImg" bind:linremove="removeImg"
+      id="imgUploader" />
+    <view class="commit">
       <view>
         <l-button type="default" shape="semicircle" bindtap="submitBlog">提交</l-button>
       </view>
@@ -146,6 +77,25 @@
     <l-tag shape="square" l-class="notice" icon="default">showImage || showWheatherIcon</l-tag>
   </view>
 </van-popup>
+<!-- 查看日志弹窗 -->
+<van-popup show="{{viewBlogPage}}" locked="{{false}}" l-class="blogViewPopup" round lock-scroll close-on-click-overlay
+  overlay="{{true}}">
+  <view class="blogView">
+    <view class="viewBlogIcon" bindtap="closeBlogPage">
+      <image src="../../utils/icons/{{viewBlogWeatherIcon}}.svg" style="width:40rpx;height:40rpx" 
+        ></image>
+    </view>
+    <l-input label="标题" required="{{true}}" disabled="{{true}}" value="{{viewBlogTitle}}" l-class="viewBlogTitle" />
+
+    <l-textarea maxlength="1000" l-class="viewBlogTextarea" value="{{viewBlogContent}}" />
+    <view>
+    <image src="{{viewBlogImg}}"  bindtap="viewImgDetail" class="viewBlogImg"  style="width:200rpx;height:200rpx"></image>
+  </view>
+    <!-- <van-notice-bar text="showImage&&showWheatherIcon" color="#1989fa" background="#ecf9ff" scrollable="{{ false }}"
+        custom-class="notice" left-icon="info-o" /> -->
+    <l-tag shape="square" l-class="notice" icon="default">{{viewBlogUploadTime}}</l-tag>
+  </view>
+</van-popup>
 
 <!-- 打卡日历按钮-->
 <view class="clockList">
@@ -153,14 +103,15 @@
 </view>
 <!-- 打卡日历弹窗 -->
 <l-popup show="{{clockList}}" locked="{{false}}">
-    <!-- <view class="list">
+  <!-- <view class="list">
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
       <l-button type="default" shape="circle" bindtap="clockOn" size="mini">打卡</l-button>
     </view> -->
-    <view class="clockCalendar">
-      <van-datetime-picker type="year-month" value="{{ currentDate }}" min-date="{{ minDate }}" max-date="{{ maxDate }}" bind:input="onInput" title="选择查看的月份" />
-    </view>
-  </l-popup>
+  <view class="clockCalendar">
+    <van-datetime-picker type="year-month" value="{{ currentDate }}" min-date="{{ minDate }}" max-date="{{ maxDate }}"
+      title="选择查看的月份" bind:confirm="getSelectedMonth" bind:cancel="hideClockList" />
+  </view>
+</l-popup>
