@@ -1,7 +1,7 @@
 // index.js
 // 获取应用实例
 //const app = getApp()
-
+import {httpRequest} from "../../utils/request"
 Page({
   onLoad() {
 
@@ -62,59 +62,61 @@ Page({
       //表的设计应该为每一条都有某个分类的标记以及前缀，在获取时随机获得一条数据，将数据返回给前端
       //添加一张分类表，内容为分类的标记，可以添加分类
       //内容表关联分类表（对应标记），在添加内容时有选择分类
-      let foodArr = ['火锅', '日料', '拉面', '烧烤', '烤鸭', '西式快餐', '自助餐', '寿司', '麻辣烫']
-      let skillArr = ['Ps', 'Ai', 'Java', 'Mysql', 'Javascript', 'Pr', 'Ae', 'Lr', 'Linux']
-      let Recipes = ['红烧肉', '水煮肉片', '小酥肉', '红烧鸡翅', '可乐鸡翅', '红烧鱼', '咖喱鸡', '油闷大虾', '糖醋里脊', '小炒肉', '尖椒肉丝']
-      let allArr = [foodArr, skillArr, Recipes]
+      // let foodArr = ['火锅', '日料', '拉面', '烧烤', '烤鸭', '西式快餐', '自助餐', '寿司', '麻辣烫']
+      // let skillArr = ['Ps', 'Ai', 'Java', 'Mysql', 'Javascript', 'Pr', 'Ae', 'Lr', 'Linux']
+      // let Recipes = ['红烧肉', '水煮肉片', '小酥肉', '红烧鸡翅', '可乐鸡翅', '红烧鱼', '咖喱鸡', '油闷大虾', '糖醋里脊', '小炒肉', '尖椒肉丝']
+      // let allArr = [foodArr, skillArr, Recipes]
 
-      let parentArrNum = Math.floor(Math.random() * allArr.length);//从allArr中获取随机下标，即获取随机子数组的下标
-      //console.log(allArr[parentArrNum])
-      let childArr = allArr[parentArrNum];//获取子数组
-      let childArrNum = Math.floor(Math.random() * childArr.length);//在子数组中获取随机下标
-      //console.log(arr[i])
-      let content = childArr[childArrNum];//获取最终结果
-      //console.log(childArr,childArrNum,content)
-      switch (parentArrNum) {
-        case 0:
-          content = '周末去吃' + content;
-          break;
-        case 1:
-          content = '我要学习' + content;
-          break;
-        case 2:
-          content = '这周要做' + content;
-          break;
-        default:
-          break;
-      }
-      
-      wx.showModal({
-        //cancelColor: 'cancelColor',
-        //cancelText: '返回',
-        //confirmColor: 'lightskyblue',
-        confirmText: '好的',
-        // content: parentArrNum==0?"周末去吃"+allArr[parentArrNum][childArrNum]:"我要学习"+allArr[parentArrNum][childArrNum],
-        content: content,
-        //editable: true,
-        // placeholderText: 'placeholderText',
-        showCancel: false,
-        title: '做个决定吧',
-        success(result) {
-          //此处的Promise只是为了看起来高级，实际上一点意义都没有，纯属脱裤子放屁
-          let promise = new Promise(function (resolve, reject) {
-            resolve('说做就做')
-          })
-          if (result.confirm) {
-            promise.then(function (successMessage) {
-              wx.showToast({
-                title: successMessage
-              })
+      // let parentArrNum = Math.floor(Math.random() * allArr.length);//从allArr中获取随机下标，即获取随机子数组的下标
+      // //console.log(allArr[parentArrNum])
+      // let childArr = allArr[parentArrNum];//获取子数组
+      // let childArrNum = Math.floor(Math.random() * childArr.length);//在子数组中获取随机下标
+      // //console.log(arr[i])
+      // let content = childArr[childArrNum];//获取最终结果
+      // //console.log(childArr,childArrNum,content)
+      // switch (parentArrNum) {
+      //   case 0:
+      //     content = '周末去吃' + content;
+      //     break;
+      //   case 1:
+      //     content = '我要学习' + content;
+      //     break;
+      //   case 2:
+      //     content = '这周要做' + content;
+      //     break;
+      //   default:
+      //     break;
+      // }
+      httpRequest("https://dabenfeng.top/getRandomChoose","",1).then(res=>{
+        wx.showModal({
+          //cancelColor: 'cancelColor',
+          //cancelText: '返回',
+          //confirmColor: 'lightskyblue',
+          confirmText: '好的',
+          // content: parentArrNum==0?"周末去吃"+allArr[parentArrNum][childArrNum]:"我要学习"+allArr[parentArrNum][childArrNum],
+          content: res,
+          //editable: true,
+          // placeholderText: 'placeholderText',
+          showCancel: false,
+          title: '做个决定吧',
+          success(result) {
+            //此处的Promise只是为了看起来高级，实际上一点意义都没有，纯属脱裤子放屁
+            let promise = new Promise(function (resolve, reject) {
+              resolve('说做就做')
             })
-          }
-        },
-        fail: (res) => { },
-        complete: (res) => { },
+            if (result.confirm) {
+              promise.then(function (successMessage) {
+                wx.showToast({
+                  title: successMessage
+                })
+              })
+            }
+          },
+          fail: (res) => { },
+          complete: (res) => { },
+        })
       })
+      
     }
   }
 })

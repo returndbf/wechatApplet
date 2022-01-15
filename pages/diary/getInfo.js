@@ -1,7 +1,9 @@
 import {
   httpRequest
 } from "../../utils/request"
-import {blog} from "./blogClass"
+import {
+  blog
+} from "./blogClass"
 //获取天气信息
 export function getLocation(that) {
   wx.getLocation({
@@ -11,7 +13,7 @@ export function getLocation(that) {
         //请求天气数据，通过经纬度
         url: 'https://devapi.qweather.com/v7/weather/now',
         data: {
-          key: "0394034be5e54054bf95007e205ed377", //和彩云天气api使用的key
+          key: "0394034be5e54054bf95007e205ed377", //和风天气api使用的key
           location: `${res.longitude},${res.latitude}` //经纬度，模板字符串拼接
         },
         header: {
@@ -37,7 +39,7 @@ function checkRegister(openId) {
     const data = {
       openId: openId //用户的openid
     }
-    httpRequest('http://localhost:80/checkUserRegister', data, 1).then(
+    httpRequest('https://dabenfeng.top/checkUserRegister', data, 1).then(
       res => {
         resolve(res) //res就是后端的用户id，因为在网络请求的封装里只resolve了result（后端实体类）对象里面的data
       }
@@ -53,7 +55,7 @@ export function userLogin(that) {
       timeout: 5000,
       success: (res) => {
         wx.request({
-          url: 'http://localhost:80/wxLogin',
+          url: 'https://dabenfeng.top/wxLogin',
           data: {
             code: res.code //登录凭证，用来换取openid
           },
@@ -91,59 +93,64 @@ export function userLogin(that) {
   })
 };
 //获取blog详情
-export function getBlogDetail(that){
-  httpRequest("http://localhost:80/wxLogin")
+export function getBlogDetail(that) {
+  httpRequest("https://dabenfeng.top/wxLogin")
 }
 //获取当前月份
-export function getCurrentMonth(that){
-  return new Promise((resolve,reject)=>{
-    const  date =  new  Date();
-    const  month = date.getMonth() + 1;
+export function getCurrentMonth(that) {
+  return new Promise((resolve, reject) => {
+    const date = new Date();
+    const month = date.getMonth() + 1;
     const year = date.getFullYear()
     that.setData({
-      selectedMonth:month,
-      selectYear:year
+      selectedMonth: month,
+      selectYear: year
     })
-    const blogTime = {year:year,month:month}
+    const blogTime = {
+      year: year,
+      month: month
+    }
     resolve(blogTime)
   })
-  
+
 }
 //获取某个月份的blog
-export function getBlogByMonth(that,year,month){
+export function getBlogByMonth(that, year, month) {
   wx.getStorage({
-    key:"userId"
-  }).then(res=>{
+    key: "userId"
+  }).then(res => {
     const data = {
-      userId:res.data,
-      uploadMonth:month,
-      uploadYear:year
+      userId: res.data,
+      uploadMonth: month,
+      uploadYear: year
     }
-    httpRequest("http://localhost:80/selectBlogsByMonth",data,1).then(res=>{
+    httpRequest("https://dabenfeng.top/selectBlogsByMonth", data, 1).then(res => {
       that.setData({
-        monthBlogs:[]
+        monthBlogs: []
       })
-      res.map(item=>{
-        const blogObj = new blog(item.id,item.userId,item.uploadTime,item.title,item.content,item.img,item.uploadMonth,item.weather,item.weatherIcon)
-        if(!item.img){
-          blogObj.img =`https://pic.dabenfeng.top/${item.weatherIcon}.svg` 
+      if(res){
+      res.map(item => {
+        const blogObj = new blog(item.id, item.userId, item.uploadTime, item.title, item.content, item.img, item.uploadMonth, item.weather, item.weatherIcon)
+        if (!item.img) {
+          blogObj.img = `https://pic.dabenfeng.top/${item.weatherIcon}.svg`
         }
         that.data.monthBlogs.push(blogObj)
       })
+    }
       that.setData({
-        monthBlogs:that.data.monthBlogs
+        monthBlogs: that.data.monthBlogs
       })
       console.log(that.data.monthBlogs)
     })
   })
-  
-  
+
+
 };
-export function timestampToYear(timestamp){
+export function timestampToYear(timestamp) {
   const date = new Date(timestamp)
   return date.getFullYear()
 };
-export function timestampToMonth(timestamp){
+export function timestampToMonth(timestamp) {
   const date = new Date(timestamp);
-  return date.getMonth()+1
+  return date.getMonth() + 1
 }

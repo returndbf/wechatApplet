@@ -123,7 +123,7 @@ Page({
         userId: res.data
       }
       // 发送网络请求，请求成功之后弹出窗口
-      httpRequest("http://localhost:80/userClock", data, 1).then(res => {
+      httpRequest("https://dabenfeng.top/userClock", data, 1).then(res => {
         console.log(res) //打卡天数
         wx.showToast({
           title: '打卡成功，总打卡天数:' + res,
@@ -165,7 +165,7 @@ Page({
         userId: res.data
       }
       //校验今日日志数量
-      httpRequest("http://localhost:80/checkUserTodayBlogsCount", data, 1).then(res => {
+      httpRequest("https://dabenfeng.top/checkUserTodayBlogsCount", data, 1).then(res => {
         if (res != false) {
           this.setData({
             blogPage: true

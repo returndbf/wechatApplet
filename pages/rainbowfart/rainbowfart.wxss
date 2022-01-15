@@ -101,3 +101,11 @@ l-button{
   border: 2rpx solid rgb(206, 218, 248);
   
 }
+.codeShow{
+  width: 500rpx;
+  height: 500rpx;
+  background-color: #fff;
+  border-radius: 10%;
+  line-height: 500rpx;
+  text-align: center;
+}

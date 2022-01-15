@@ -26,7 +26,7 @@ export function checkClock(that) {
       userId: res.data
     }
     //发送请求，检查用户是否打卡，如果打卡不显示打卡按钮
-    httpRequest("http://localhost:80/userClockToday", data, 1).then(res => {
+    httpRequest("https://dabenfeng.top/userClockToday", data, 1).then(res => {
       if (res === false) {
         that.setData({
           notClock: true

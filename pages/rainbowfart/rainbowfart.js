@@ -47,19 +47,19 @@ Page({
     modalDisplay: true,//弹窗显示，true为隐藏，false为显示
     inputSentence: "",//存储文本框中的数据
     word: "",//暗号
-    disabled:true
+    disabled:true,
+    code:false ,//暗号弹窗
+    codeShowText:"换个暗号试试吧~",
+    wmqArr:["大傻逼果然搜了自己的名字","蜡笔小新的鸡鸡到底多长","祝你今天愉快","因为你我会记得这一分钟","什么都没有了"],
+    qxfArr:["搜我的名字做什么","吃了吗","今天打卡了吗","可恶，竟然知道我的大名"],
+    dbfArr:["我是大笨峰，有何贵干","会尽快开发留言功能的","别点了，好好学习","今天是美好的一天吗","你好，不好也给我好"],
+    utilTextArr:["抽烟还是抽风，答案在空中","祝你愉快","人生何处不相逢","对月形单望相互，只羡鸳鸯不羡仙","你是谁，你是不是爱玩屎的阿拉蕾"]
   },
   //切换句子的方法
   change() {
     //console.log(db)
     //随机获取颜色数组中一条数据下标
     let randomColor = Math.floor(Math.random() * this.data.colors.length)
-    //从https://dabenfeng.top/后端获取数据
-    // httprRequest("https://dabenfeng.top/rainbowFart/randomRainbowFart","",1).then(res=>console.log(res)).catch(err=>{
-    //   wx.showToast({
-    //     title: err;
-    //   })
-    // })
     wx.request({
       url: 'https://dabenfeng.top/rainbowFart/randomRainbowFart',
       header:{
@@ -120,27 +120,50 @@ Page({
       }
     })
   },
-  //添加彩虹屁按钮
-  //暂时先不使用
+
+  randomCodeText(array){
+    let Index = Math.floor(Math.random() * array.length)
+    let random = array[Index]
+    return random
+  },
+  
+  //暗号弹窗
+
   add() {
-    wx.chooseMedia({
-      success(res){
-        console.log(res)
-      }
-    })
-  //  const deviceInfo = wx.getDeviceInfo()
-
-    // console.log(deviceInfo.abi)
-    // console.log(deviceInfo.benchmarkLevel)
-    // console.log(deviceInfo.brand)
-    // console.log(deviceInfo.model)
-    // console.log(deviceInfo.platform)
-    // console.log(deviceInfo.system)
-
+    
     wx.showModal({
-      confirmText:"知道啦",
-      title:"此功能暂时维护中",
-      showCancel:false
+      confirmText:"确认",
+      title:"输入暗号~",
+      showCancel:false,
+      editable:true
+    }).then(res=>{
+      
+      if(res.content=="王梦琦"||res.content=="wmq"){
+        const wmqRandom = this.randomCodeText(this.data.wmqArr)
+        this.setData({
+          code:true,
+          codeShowText:wmqRandom
+        })
+      }else if(res.content=="秦晓峰"||res.content=="qinxiaofeng"){
+        const qxfRandom = this.randomCodeText(this.data.qxfArr)
+        this.setData({
+          code:true,
+          codeShowText:qxfRandom
+        })
+      }else if(res.content=="大笨峰"||res.content=="dbf"){
+        const dbfRandom = this.randomCodeText(this.data.dbfArr)
+        this.setData({
+          code:true,
+          codeShowText:dbfRandom
+        })
+      }else{
+        const utilRandom = this.randomCodeText(this.data.utilTextArr)
+        this.setData({
+          code:true,
+          codeShowText:utilRandom
+        })
+      }
+      console.log(res.content)
     })
   },
   //弹窗返回按钮

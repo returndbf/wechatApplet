@@ -30,7 +30,7 @@ export function submit(that) {
       wx.uploadFile({
         filePath: that.data.blogImg, //存储的文件路径
         name: 'file',
-        url: 'http://localhost:80/insertBlog',
+        url: 'https://dabenfeng.top/insertBlog',
         formData: data,
         success: res => {
           // console.log("上传成功",res)
@@ -63,7 +63,7 @@ export function submit(that) {
         }
       })
     } else {
-      httpRequest("http://localhost:80/insertBlog", data, 1, "post").then(res => {
+      httpRequest("https://dabenfeng.top/insertBlog", data, 1, "post").then(res => {
         wx.hideLoading({ //隐藏加载框
         }).then(res => {
           wx.showToast({ //提示框
